@@ -3,7 +3,7 @@ import Main from "../../layout/Main";
 import Home from "../../pages/Home/Home";
 import Blogs from "../../pages/Blogs/Blogs";
 import Login from "../../pages/Login/Login/Login";
-import Signup from "../../pages/Signup/Signup";
+import Signup from "../../pages/Login/Signup/Signup";
 
 export const routes = createBrowserRouter([
 

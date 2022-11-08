@@ -28,7 +28,7 @@ const AuthProvider = ({children}) => {
     }
 
     const logOut = () =>{
-        localStorage.removeItem('genius-token');
+        localStorage.removeItem('jwt-token');
         return signOut(auth);
     }
 

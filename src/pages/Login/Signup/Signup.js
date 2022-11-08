@@ -3,11 +3,21 @@ import { useState } from "react";
 import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 const Signup = () => {
     const [error, setError] = useState("");
-    const {createUser} = useContext(AuthContext)
+    const {createUser, user} = useContext(AuthContext)
+    const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
+  const loginDone = () => {
+    console.log(from);
+    Navigate(from, { replace: true });
+  };
+
     const handleSignUp = (event) =>{
         event.preventDefault();
         const form = event.target;
@@ -20,6 +30,7 @@ const Signup = () => {
         console.log(user);
         form.reset();
         setError("");
+        loginDone();
       })
       .catch((e) => {
         console.error(e);
@@ -27,6 +38,10 @@ const Signup = () => {
       });
 
     }
+    if (user) {
+        return <Navigate to={from} state={{ from: location }} replace></Navigate>;
+      }
+
     return (
         <div>
             <Container className='w-50'>
