@@ -2,8 +2,9 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div >
-            <p class="text-center">Center aligned text on all viewport sizes.</p>
+        <div class="text-center text-muted " >
+            <p className='mb-0' ><small>©2021 TANNI'S KITCHEN LLC. ALL RIGHTS RESERVED.</small></p>
+            <p className='mt-0'><small>Terms & Conditions / Privacy Policy / Official Giveaway Rules</small></p>
         </div>
     );
 };
