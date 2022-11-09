@@ -6,6 +6,20 @@ import Login from "../../pages/Login/Login/Login";
 import Signup from "../../pages/Login/Signup/Signup";
 import Services from "../../pages/Services/Services";
 import ServiceDetails from "../../pages/Services/ServiceDetails";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import AddService from "../../pages/Services/AddService";
+
+const servicesAndReviewsLoader = async (id) => {
+    const serviceResponse = await fetch(`http://localhost:5000/services/${id}`);
+    const service = await serviceResponse.json();
+    const reviewsResponse = await fetch(`http://localhost:5000/reviewsForService/${id}`);
+    const reviews = await reviewsResponse.json();
+
+    console.log("service", service);          
+    console.log("reviews",reviews);
+
+    return {service, reviews};
+}
 
 export const routes = createBrowserRouter([
   {
@@ -25,15 +39,7 @@ export const routes = createBrowserRouter([
       {
         path: "/services/:id",
         element: <ServiceDetails></ServiceDetails>,
-        loader: ({params}) => {
-          const services = fetch(`http://localhost:5000/services/${params.id}`);
-          const reviews = fetch(`http://localhost:5000/reviewsForService/${params.id}`);
-
-          console.log(services);          
-          console.log(reviews);
-
-          return {services, reviews};
-        },
+        loader: ({params}) => servicesAndReviewsLoader(params.id),
       },
       {
         path: "blogs",
@@ -47,6 +53,10 @@ export const routes = createBrowserRouter([
         path: "/signup",
         element: <Signup></Signup>,
       },
+      {
+        path: "/addServices",
+        element:<PrivateRoute><AddService></AddService></PrivateRoute>
+      }
     ],
   },
 ]);

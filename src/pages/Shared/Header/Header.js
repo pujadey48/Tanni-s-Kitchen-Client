@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { GoogleAuthProvider } from 'firebase/auth';
-import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import { AuthContext, getJWT } from '../../../contexts/AuthProvider/AuthProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, ButtonGroup, Dropdown, DropdownButton, Image } from 'react-bootstrap';
 import {
@@ -28,6 +28,7 @@ const Header = () => {
     };
   
     const loginDone = (user) => {
+        getJWT(user);
       if (user) {
         console.log(user);
       }
@@ -71,6 +72,16 @@ const Header = () => {
         <Nav.Item>
           <Nav.Link href='/services'>Services</Nav.Link>
         </Nav.Item>
+        {user && (
+        <Nav.Item>
+          <Nav.Link href='/addServices'>Add Service</Nav.Link>
+        </Nav.Item>
+            )}
+        {user && (
+        <Nav.Item>
+          <Nav.Link href='/myReviews'>My Reviews</Nav.Link>
+        </Nav.Item>
+            )}
         <Nav.Item>
           <Nav.Link href='/blogs'>Blogs</Nav.Link>
         </Nav.Item>

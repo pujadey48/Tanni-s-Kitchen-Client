@@ -14,7 +14,7 @@ const Home = () => {
 
   return (
     <Container>
-    {/* banner section */}
+      {/* banner section */}
       <div>
         <Card className="bg-dark text-white">
           <Card.Img
@@ -51,9 +51,12 @@ const Home = () => {
         </div>
         {/* <Button variant="primary"><Link to={'/services'}> Show all</Link></Button> */}
         <div className="d-flex w-100 justify-content-end">
-        <Link to={`/services`}>
-                <button className="btn btn-warning">You Can See All Here <FaArrowAltCircleRight></FaArrowAltCircleRight></button>
-        </Link>
+          <Link to={`/services`}>
+            <button className="btn btn-warning">
+              You Can See All Here{" "}
+              <FaArrowAltCircleRight></FaArrowAltCircleRight>
+            </button>
+          </Link>
         </div>
       </div>
       <div className="mt-5">
@@ -70,11 +73,11 @@ const Home = () => {
               Welcome to <span className="text-warning">Tanni's Kitchen!</span>
             </Card.Title>
             <Card.Text className="fs-2 shadow">
-              <p>
-                <span className="text-warning">Start Here:</span>Download your
-                free
-              </p>{" "}
-              <p>Sensual Cooking Starter Guide</p>
+              <span className="text-warning">Start Here:</span>Download your
+              free
+            </Card.Text>{" "}
+            <Card.Text className="fs-2 shadow">
+              Sensual Cooking Starter Guide
             </Card.Text>
             <Form className="w-50 h-50">
               <Form.Group className="mb-3" controlId="formBasicEmail">

@@ -8,6 +8,23 @@ import { useEffect } from 'react';
 export const AuthContext = createContext();
 const auth = getAuth(app);
 
+export const getJWT = (currentUser)=> {
+    // get jwt token
+    fetch('http://localhost:5000/jwt', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(currentUser)
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log("token",data);
+            // local storage is the easiest but not the best place to store jwt token
+            localStorage.setItem('jwt-token', data.token);
+        });
+}
+
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -31,6 +48,7 @@ const AuthProvider = ({children}) => {
         localStorage.removeItem('jwt-token');
         return signOut(auth);
     }
+    
 
     useEffect( () =>{
         const unsubscribe = onAuthStateChanged(auth, currentUser =>{
@@ -47,10 +65,11 @@ const AuthProvider = ({children}) => {
     const authInfo = {
         user, 
         loading,
+        setLoading,
         createUser, 
         providerLogin,
         login, 
-        logOut
+        logOut,
     }
 
     return (
