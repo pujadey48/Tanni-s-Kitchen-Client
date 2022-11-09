@@ -6,6 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link, useLoaderData } from "react-router-dom";
 import ServiceCard from "../Services/ServiceCard";
+import { FaArrowAltCircleRight } from "react-icons/fa";
 
 const Home = () => {
   const services = useLoaderData();
@@ -13,6 +14,7 @@ const Home = () => {
 
   return (
     <Container>
+    {/* banner section */}
       <div>
         <Card className="bg-dark text-white">
           <Card.Img
@@ -47,7 +49,12 @@ const Home = () => {
             <ServiceCard key={service._id} service={service}></ServiceCard>
           ))}
         </div>
-        <Button variant="primary"><Link to={'/services'}> Show all</Link></Button>
+        {/* <Button variant="primary"><Link to={'/services'}> Show all</Link></Button> */}
+        <div className="d-flex w-100 justify-content-end">
+        <Link to={`/services`}>
+                <button className="btn btn-warning">You Can See All Here <FaArrowAltCircleRight></FaArrowAltCircleRight></button>
+        </Link>
+        </div>
       </div>
       <div className="mt-5">
         <Card className="bg-dark text-white ">

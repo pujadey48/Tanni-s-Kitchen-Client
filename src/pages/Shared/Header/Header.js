@@ -69,7 +69,7 @@ const Header = () => {
           <Nav.Link href="/">Home</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href='/'>Services</Nav.Link>
+          <Nav.Link href='/services'>Services</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link href='/blogs'>Blogs</Nav.Link>
