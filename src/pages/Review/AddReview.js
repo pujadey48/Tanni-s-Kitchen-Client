@@ -1,29 +1,34 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Form, Button, Container, Alert } from "react-bootstrap";
+import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { getUrl } from "../../Util/Util";
 
-const AddService = () => {
+const AddReview = ({serviceId}) => {
   const [error, setError] = useState("");
+  const { user } = useContext(AuthContext);
 
   const handleAddService = (event) => {
     event.preventDefault();
     const form = event.target;
 
-    const name = form.name.value;
-    const img = form.img.value;
-    const price = form.price.value;
+    const uid = user?.uid || 'unregistered';
+    const name = user?.displayName || user?.email || 'Anonimous';
+    const photoURL = user?.photoURL || '';
     const rating = form.rating.value;
-    const description = form.description.value;
+    const review = form.review.value;
+
+    console.log("ServiceId", serviceId)
 
     const service = {
-      name: name,
-      img: img,
-      rating: rating,
-      price: price,
-      description: description,
+        uid: uid,
+        serviceId: serviceId,
+        name: name,
+        photoURL: photoURL,
+        rating: rating,
+        review: review,
     };
 
-    fetch(getUrl("/services"), {
+    fetch(getUrl("/reviews"), {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -36,7 +41,7 @@ const AddService = () => {
         console.log(data);
         if (data.acknowledged) {
           
-            alert("Service added successfully");
+            alert("Review added successfully");
 
           form.reset();
           setError("");
@@ -49,8 +54,8 @@ const AddService = () => {
   };
 
   return (
-    <Container>
-      <h3 className="text-warning fs-2 fst-italic">Add a service</h3>
+    <Container className="mb-5">
+      <h3 className="text-warning fs-2 fst-italic">Add a review</h3>
       {error && (
         <Alert
           key={"danger"}
@@ -62,25 +67,6 @@ const AddService = () => {
         </Alert>
       )}
       <Form className="w-50 h-50" onSubmit={handleAddService}>
-        <Form.Group className="mb-3" controlId="formBasicName">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            type="text"
-            name="name"
-            placeholder="Enter Service Name"
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicImageurl">
-          <Form.Label>Image URL</Form.Label>
-          <Form.Control type="text" name="img" placeholder="Enter Image URL" 
-              required/>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPrice">
-          <Form.Label>Price</Form.Label>
-          <Form.Control type="text" name="price" placeholder="Enter price" 
-              required/>
-        </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicRating">
           <Form.Label>Rating</Form.Label>
           <Form.Select aria-label="Default select example" name="rating"
@@ -93,8 +79,8 @@ const AddService = () => {
           </Form.Select>
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Service Details</Form.Label>
-          <Form.Control as="textarea" rows={3} name="description" 
+          <Form.Label>Please add a review</Form.Label>
+          <Form.Control as="textarea" rows={3} name="review" 
               required/>
         </Form.Group>
         <Button variant="warning" type="submit">
@@ -105,4 +91,4 @@ const AddService = () => {
   );
 };
 
-export default AddService;
+export default AddReview;

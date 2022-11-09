@@ -8,11 +8,12 @@ import Services from "../../pages/Services/Services";
 import ServiceDetails from "../../pages/Services/ServiceDetails";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AddService from "../../pages/Services/AddService";
+import { getUrl } from "../../Util/Util";
 
 const servicesAndReviewsLoader = async (id) => {
-    const serviceResponse = await fetch(`http://localhost:5000/services/${id}`);
+    const serviceResponse = await fetch(getUrl(`/services/${id}`));
     const service = await serviceResponse.json();
-    const reviewsResponse = await fetch(`http://localhost:5000/reviewsForService/${id}`);
+    const reviewsResponse = await fetch(getUrl(`/reviewsForService/${id}`));
     const reviews = await reviewsResponse.json();
 
     console.log("service", service);          
@@ -29,12 +30,12 @@ export const routes = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch(`http://localhost:5000/threeservices`),
+        loader: () => fetch( getUrl(`/threeservices`)),
       },
       {
         path: "/services",
         element: <Services></Services>,
-        loader: () => fetch(`http://localhost:5000/services`),
+        loader: () => fetch(getUrl(`/services`)),
       },
       {
         path: "/services/:id",
@@ -56,6 +57,10 @@ export const routes = createBrowserRouter([
       {
         path: "/addServices",
         element:<PrivateRoute><AddService></AddService></PrivateRoute>
+      },
+      {
+        path: "myReviews",
+        element:<PrivateRoute></PrivateRoute>
       }
     ],
   },
