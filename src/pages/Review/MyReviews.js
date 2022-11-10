@@ -31,7 +31,11 @@ const MyReviews = () => {
 
   const handleUpdateReview = (updatedReview) => {
     const remaining = reviews.filter(rev => rev._id !== updatedReview._id);
-    const newReview = [updatedReview, ...remaining];
+    const updated = reviews.find(rev => rev._id === updatedReview._id);
+
+    updated.review = updatedReview.review;
+
+    const newReview = [updated, ...remaining];
     setReviews(newReview);
     showUpdateeToastMessage();
   };
