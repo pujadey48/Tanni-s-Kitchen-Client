@@ -2,7 +2,8 @@ import React from 'react';
 import { Button, Container } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 
-const MyReviewCard = () => {
+const MyReviewCard = ({re}) => {
+    const {review} = re;
     return (
         <div>
             <Container>

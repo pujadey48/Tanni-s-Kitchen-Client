@@ -17,7 +17,12 @@ const ServiceCard = ({ service }) => {
     </PhotoProvider>
         <Card.Body>
           <Card.Title>{name}</Card.Title>
-          <Card.Text>{description}</Card.Text>
+          <div className="row">
+            
+            <Card.Text className="col-8 text-truncate">{description}</Card.Text>
+            
+          </div>
+          
           <p>Price: tk{price}</p>
           <p>Ratings: {rating}</p>
           {/* <Button variant="primary"><Link to={`/services/${_id}`}>Show Details</Link></Button> */}

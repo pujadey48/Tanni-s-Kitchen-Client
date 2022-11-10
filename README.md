@@ -7,4 +7,15 @@
 
 
 ## Description
-1. 
+1. User will able to check services.
+2. User will able to check service details.
+3. User will able to login using email-pass, google.
+4. AddService and MyReviews pages are resticted only loged in users can see.
+5. Blogs page is also added.
+
+## Technologies used in this project
+1. This project was build with `react` framework.
+2. For design and layout `react-bootstrap` and `bootstrap` lib is used.
+3. For showing icons `react-icon` is used.
+4. `firebase` is used for authentication and authorization.
+5. `react-router-dom` is used for routing and navigation.
