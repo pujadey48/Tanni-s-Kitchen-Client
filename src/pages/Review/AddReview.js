@@ -2,10 +2,18 @@ import React, { useContext, useState } from "react";
 import { Form, Button, Container, Alert } from "react-bootstrap";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import { getUrl } from "../../Util/Util";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddReview = ({serviceId}) => {
   const [error, setError] = useState("");
   const { user } = useContext(AuthContext);
+
+  const showToastMessage = () => {
+    toast.success('Successfully added!', {
+        position: toast.POSITION.TOP_RIGHT
+    });
+};
 
   const handleAddService = (event) => {
     event.preventDefault();
@@ -41,7 +49,9 @@ const AddReview = ({serviceId}) => {
         console.log(data);
         if (data.acknowledged) {
           
-            alert("Review added successfully");
+            // alert("Review added successfully");
+            showToastMessage();
+            <ToastContainer />
 
           form.reset();
           setError("");

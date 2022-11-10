@@ -6,9 +6,11 @@ import Form from "react-bootstrap/Form";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 import AddReview from "../Review/AddReview";
+import ServiceDetailsReviewCard from "../Review/ServiceDetailsReviewCard";
 
 const ServiceDetails = () => {
-  const { service, reviews } = useLoaderData();
+   const { service, reviews } = useLoaderData();
+   
 
   const { user } = useContext(AuthContext);
 
@@ -32,9 +34,19 @@ const ServiceDetails = () => {
       {reviews.length > 0 && (
         <div>
           <h3 className="mt-5">There are {reviews.length} reviews</h3>
+          <div className="d-flex flex-wrap">
+            {reviews.map((rev) => (
+                <ServiceDetailsReviewCard key={rev._id} rev={rev}></ServiceDetailsReviewCard>
+            ))}
+        </div>
         </div>
       )}
       {user && <AddReview key={service._id} serviceId={service._id}></AddReview>}
+
+
+
+
+
     </Container>
   );
 };

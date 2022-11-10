@@ -46,6 +46,7 @@ useEffect(()=>{
           </Card.ImgOverlay>
         </Card>
       </div>
+      {/* services------ */}
       <div className="mt-5">
         <h1 className="fs-2 fw-semibold text-danger text-center">Services</h1>
         <div className="d-flex flex-wrap">

@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Alert } from "react-bootstrap";
 import { getUrl } from "../../Util/Util";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddService = () => {
   const [error, setError] = useState("");
+
+  const showToastMessage = () => {
+    toast.success('Successfully added!', {
+        position: toast.POSITION.TOP_RIGHT
+    });
+};
 
   const handleAddService = (event) => {
     event.preventDefault();
@@ -36,7 +44,9 @@ const AddService = () => {
         console.log(data);
         if (data.acknowledged) {
           
-            alert("Service added successfully");
+            //  alert("Service added successfully");
+            showToastMessage();
+            <ToastContainer />
 
           form.reset();
           setError("");
@@ -97,9 +107,10 @@ const AddService = () => {
           <Form.Control as="textarea" rows={3} name="description" 
               required/>
         </Form.Group>
-        <Button variant="warning" type="submit">
+        <Button  variant="warning" type="submit">
           Submit
         </Button>
+        <ToastContainer />
       </Form>
     </Container>
   );
