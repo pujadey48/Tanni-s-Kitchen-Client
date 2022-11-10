@@ -46,7 +46,6 @@ const AddService = () => {
           
             //  alert("Service added successfully");
             showToastMessage();
-            <ToastContainer />
 
           form.reset();
           setError("");
@@ -71,6 +70,7 @@ const AddService = () => {
           {error}
         </Alert>
       )}
+      <ToastContainer />
       <Form className="w-50 h-50" onSubmit={handleAddService}>
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Name</Form.Label>
