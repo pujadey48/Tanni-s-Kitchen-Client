@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -9,10 +9,19 @@ import AddReview from "../Review/AddReview";
 import ServiceDetailsReviewCard from "../Review/ServiceDetailsReviewCard";
 
 const ServiceDetails = () => {
-   const { service, reviews } = useLoaderData();
-   
+  const { service, reviews } = useLoaderData();
+  const [serviceReviews, setServiceReviews] = useState([]);
 
   const { user } = useContext(AuthContext);
+
+  const handleAddReview = (newReview) => {
+    const newReviews = [newReview, ...serviceReviews];
+    setServiceReviews(newReviews);
+  };
+
+  useEffect(() => {
+    setServiceReviews(reviews);
+  }, [reviews]);
 
   console.log("ServiceID", service._id);
   return (
@@ -26,27 +35,34 @@ const ServiceDetails = () => {
           <Card.Text>Rating: {service.rating}</Card.Text>
         </Card.Body>
       </Card>
-      {reviews.length === 0 && (
+      {serviceReviews.length === 0 && (
         <div className="mt-5">
-          <h1 className="fs-2 fw-semibold text-danger text-center">No reviews were added</h1>
+          <h1 className="fs-2 fw-semibold text-danger text-center">
+            No reviews were added
+          </h1>
         </div>
       )}
-      {reviews.length > 0 && (
+      {serviceReviews.length > 0 && (
         <div>
           <h3 className="mt-5">There are {reviews.length} reviews</h3>
           <div className="d-flex flex-wrap">
-            {reviews.map((rev) => (
-                <ServiceDetailsReviewCard key={rev._id} rev={rev}></ServiceDetailsReviewCard>
+            {serviceReviews.map((rev) => (
+              <ServiceDetailsReviewCard
+                key={rev._id}
+                rev={rev}
+              ></ServiceDetailsReviewCard>
             ))}
-        </div>
+          </div>
         </div>
       )}
-      {user && <AddReview key={service._id} serviceId={service._id}></AddReview>}
-
-
-
-
-
+      {user && (
+        <AddReview
+          key={service._id}
+          serviceId={service._id}
+          serviceName={service.name}
+          handleAddReview={handleAddReview}
+        ></AddReview>
+      )}
     </Container>
   );
 };
