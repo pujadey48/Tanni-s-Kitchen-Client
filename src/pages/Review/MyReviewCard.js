@@ -1,9 +1,29 @@
 import React from "react";
 import { Button, Card, Container } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import { getUrl } from "../../Util/Util";
 
-const MyReviewCard = ({ rev }) => {
-  const { review, serviceName, rating } = rev;
+const MyReviewCard = ({ rev, handleDeleteReview,handleUpdateReview }) => {
+  const { _id, review, serviceName, rating} = rev;
+
+  const performDelete = id => {
+    const proceed = window.confirm('Are you sure, you want to cancel this order');
+    if (proceed) {
+        fetch(getUrl(`/reviews/${id}`), {
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('jwt-token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    handleDeleteReview(id);
+                }
+            })
+    }
+}
+
   return (
     <div>
       <Container>
@@ -23,9 +43,9 @@ const MyReviewCard = ({ rev }) => {
             <Card.Text>
               Rating: {rating}
             </Card.Text>
+          <Button variant="warning" >Update</Button>{' '}
+                <Button variant="warning" onClick={()=>{performDelete(_id)}}>Delete</Button>
           </Card.Body>
-          <Button variant="warning">Update</Button>{' '}
-                <Button variant="warning">Delete</Button>
         </Card>
       </Container>
     </div>

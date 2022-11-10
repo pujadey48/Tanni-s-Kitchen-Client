@@ -8,7 +8,7 @@ const ServiceDetailsReviewCard = ({ rev }) => {
     <div>
       <div className=" col-lg-4 col-md-6 col-12 p-1">
         <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src={photoURL} />
+          <Card.Img variant="top" src={photoURL?photoURL:'/avatar.webp'} />
           <Card.Body>
             <Card.Title>{name}</Card.Title>
             <Card.Text>{review}</Card.Text>
