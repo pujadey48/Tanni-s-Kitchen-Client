@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Container } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
@@ -7,11 +7,15 @@ import Col from "react-bootstrap/Col";
 import { Link, useLoaderData } from "react-router-dom";
 import ServiceCard from "../Services/ServiceCard";
 import { FaArrowAltCircleRight } from "react-icons/fa";
+// import { pageTitle } from "../utiles/FunctionTitle";
 
 const Home = () => {
   const services = useLoaderData();
   console.log(services);
-
+//   pageTitle = 'Home';
+useEffect(()=>{
+    document.title ="Tanni's Kitchen | Home Page"
+});
   return (
     <Container>
       {/* banner section */}

@@ -4,13 +4,14 @@ import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithE
 import app from '../../firebase/firebase.config';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { getUrl } from '../../Util/Util';
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
 
 export const getJWT = (currentUser)=> {
     // get jwt token
-    fetch('http://localhost:5000/jwt', {
+    fetch(getUrl('/jwt'), {
         method: 'POST',
         headers: {
             'content-type': 'application/json'

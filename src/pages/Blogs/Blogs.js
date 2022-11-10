@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from "react-bootstrap";
 import Accordion from 'react-bootstrap/Accordion';
 
 const Blogs = () => {
+    useEffect(()=>{
+        document.title = "Tanni's Kitchen | Blogs Page"
+    })
     return (
         <Container>
       <Accordion defaultActiveKey={['0']} alwaysOpen>
